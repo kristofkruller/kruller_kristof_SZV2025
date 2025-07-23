@@ -1,0 +1,17 @@
+{
+    "name": "kruller.kristof/kruller_kristof_szv2025",
+    "autoload": {
+        "psr-4": {
+            "KrullerKristof\\KrullerKristofSzv2025\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "kruller.kristof",
+            "email": "kruller.kristof@mbvk.hu"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

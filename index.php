@@ -7,5 +7,11 @@
 </head>
 <body>
   <h1>Hi</h1>
+
+  <?php
+    define('BASE_PATH', __DIR__);
+    require_once(__DIR__."/view/termek_leadas_ui.php");
+    require_once(__DIR__."/view/szerviz_ossz_ui.php");
+  ?>
 </body>
 </html>

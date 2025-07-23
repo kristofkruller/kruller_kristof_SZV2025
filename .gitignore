@@ -1,0 +1,40 @@
+# Composer
+/vendor/
+
+# PHP csomagmenedzser cache
+composer.lock
+
+# PHP környezeti fájlok
+.env
+.env.*
+
+# Laravel vagy egyéb framework cache/log (ha használsz ilyet)
+storage/
+bootstrap/cache/
+
+# IDE-k
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Operációs rendszer fájlok
+.DS_Store
+Thumbs.db
+
+# Log fájlok
+*.log
+
+# PHPUnit / tesztek
+.phpunit.result.cache
+
+# Coverage reports
+coverage/
+
+# Caching és temp fájlok
+*.cache
+*.tmp
+
+# Sensitive (?)
+# config.php
+# database.php
