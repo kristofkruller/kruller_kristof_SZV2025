@@ -1,8 +1,10 @@
 <?php
+require_once(__DIR__ . '/../components/msg.php');
+
 $errors = [];
 
 // DATA
-$szeriaSzam = trim($_POST['szeriaSzam'] ?? '');
+$szeriaSzam = trim($_POST['szeria_szam'] ?? '');
 $gyarto = trim($_POST['gyarto'] ?? '');
 $tipus = trim($_POST['tipus'] ?? '');
 $nev = trim($_POST['nev'] ?? '');
@@ -25,16 +27,18 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 if (!empty($errors)) {
+    $msg = '';
     foreach ($errors as $field => $message) {
-        echo "<p><strong>$field</strong>: $message</p>";
+        $msg = $msg . "<p><strong>$field</strong>: $message</p>";
     }
+    msgWithRedirect($msg);
     exit;
 } else {
 
     // QUERY DB
-    require_once(BASE_PATH . "/model/termek.php");
-    require_once(BASE_PATH . "/model/kapcsolattarto.php");
-    require_once(BASE_PATH . "/model/db.php");
+    require_once(__DIR__ . "/../model/termek.php");
+    require_once(__DIR__ . "/../model/kapcsolat_tarto.php");
+    require_once(__DIR__ . "/../model/db.php");
 
     $db = new Database();
     $conn = $db->getConnection();
@@ -45,9 +49,9 @@ if (!empty($errors)) {
         // 1. Kapcsolattartó mentése és ID lekérdezése
         $stmtKapcsolatTarto = $conn->prepare("INSERT INTO kapcsolattarto (nev, telefon, email) VALUES (?, ?, ?)");
         $stmtKapcsolatTarto->execute([
-            $kapcsolatTarto->getNev(),
-            $kapcsolatTarto->getTelefon(),
-            $kapcsolatTarto->getEmail()
+            $nev,
+            $telefon,
+            $email
         ]);
         $kapcsolattartoId = (int)$conn->lastInsertId();
 
@@ -55,7 +59,7 @@ if (!empty($errors)) {
         $termek = new Termek($szeriaSzam, $gyarto, $tipus, $kapcsolattartoId);
 
         // 3. Termék mentése
-        $stmtTermek = $conn->prepare("INSERT INTO termek (szeriaSzam, gyarto, tipus, leadas, statusz, modositas, kapcsolattarto_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmtTermek = $conn->prepare("INSERT INTO termek (szeria_szam, gyarto, tipus, leadas, statusz, modositas, kapcsolattarto_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmtTermek->execute([
             $termek->getSzeriaSzam(),
             $termek->getGyarto(),
@@ -67,9 +71,16 @@ if (!empty($errors)) {
         ]);
 
         $conn->commit();
-        echo "<p>Adatok sikeresen rögzítve az adatbázisba!</p>";
+        msgWithRedirect('Sikeres rögzítés!');
+        exit;
     } catch (PDOException $e) {
-        $conn->rollBack();
-        echo "<p>Hiba történt az adatok rögzítése során: " . $e->getMessage() . "</p>";
+        $roll = $conn->rollBack();
+        if (!$roll) {
+            msgWithRedirect("Hiba történt az adatok rögzítése során és a Rollback is meghíusult!" . $e->getMessage());
+            exit;
+        }
+        
+        msgWithRedirect("Rollback végrehajtva. Hiba történt az adatok rögzítése során: " . $e->getMessage());
+        exit;
     }
 }

@@ -28,7 +28,7 @@ CREATE TABLE kapcsolattarto (
 $pdo->exec("
 CREATE TABLE termek (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  szeriaSzam VARCHAR(100) NOT NULL,
+  szeria_szam VARCHAR(100) NOT NULL,
   gyarto VARCHAR(100) NOT NULL,
   tipus VARCHAR(100) NOT NULL,
   leadas DATETIME NOT NULL,
@@ -46,7 +46,7 @@ INSERT INTO kapcsolattarto (nev, telefon, email) VALUES
 ");
 
 $pdo->exec("
-INSERT INTO termek (szeriaSzam, gyarto, tipus, leadas, statusz, modositas, kapcsolattarto_id) VALUES
+INSERT INTO termek (szeria_szam, gyarto, tipus, leadas, statusz, modositas, kapcsolattarto_id) VALUES
   ('S12345', 'Dell', 'Inspiron 15', NOW(), 'Beérkezett', NOW(), 1),
   ('H67890', 'HP', 'EliteBook 840', NOW(), 'Javítás', NOW(), 2);
 ");

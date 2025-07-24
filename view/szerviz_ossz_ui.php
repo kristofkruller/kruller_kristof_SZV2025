@@ -1,9 +1,21 @@
-<?php
-$getPath = BASE_PATH."/controller/get_termekek.php";
-?>
 <h2>Termék összesítő</h2>
 <?php
-require_once($getPath);
+require_once(__DIR__ . "/../controller/get_termekek.php");
+require_once(__DIR__ . "/../model/termek.php");
+
+foreach ($result as $row) {
+    if ($row['szeria_szam'] === null) continue; // kapcsolattartóhoz nincs termék
+
+    $termekek[] = new Termek(
+        $row['szeria_szam'],
+        $row['gyarto'],
+        $row['tipus'],
+        (int)$row['kid'],
+        Statusz::from($row['statusz']),
+        new DateTime($row['leadas']),
+        new DateTime($row['modositas'])
+    );
+}
 
 if (!empty($termekek)) {
     echo "<table>";
