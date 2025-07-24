@@ -1,0 +1,71 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+html {
+  font-size: 20px;
+}
+html * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  transition: all 250ms ease-in-out;
+}
+html,
+body {
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+body {
+  margin: 0 auto;
+
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#content_field {
+  max-width: 1200px !important;
+}
+
+#post_form {
+  max-width: 50%;
+}
+
+#content_field, #post_form, .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}

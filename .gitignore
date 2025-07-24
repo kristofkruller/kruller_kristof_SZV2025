@@ -2,7 +2,7 @@
 /vendor/
 
 # PHP csomagmenedzser cache
-composer.lock
+# composer.lock # Committing this file to version control is important because it will cause anyone who sets up the project to use the exact same versions of the dependencies that you are using. 
 
 # PHP környezeti fájlok
 .env

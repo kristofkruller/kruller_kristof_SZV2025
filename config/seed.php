@@ -42,13 +42,19 @@ CREATE TABLE termek (
 $pdo->exec("
 INSERT INTO kapcsolattarto (nev, telefon, email) VALUES
   ('Kiss Anna', '06301234567', 'anna.kiss@example.com'),
-  ('Nagy Béla', '06201239876', 'bela.nagy@example.com');
+  ('Nagy Béla', '06201239876', 'bela.nagy@example.com'),
+  ('Tóth Csaba', '06305556666', 'csaba.toth@example.com'),
+  ('Farkas Júlia', '06307778888', 'julia.farkas@example.com'),
+  ('Szabó Péter', '06309994444', 'peter.szabo@example.com');
 ");
 
 $pdo->exec("
 INSERT INTO termek (szeria_szam, gyarto, tipus, leadas, statusz, modositas, kapcsolattarto_id) VALUES
   ('S12345', 'Dell', 'Inspiron 15', NOW(), 'Beérkezett', NOW(), 1),
-  ('H67890', 'HP', 'EliteBook 840', NOW(), 'Javítás', NOW(), 2);
+  ('H67890', 'HP', 'EliteBook 840', NOW(), 'Javítás', NOW(), 2),
+  ('L11223', 'Lenovo', 'ThinkPad X1', NOW(), 'Hibafeltárás', NOW(), 3),
+  ('A33445', 'Asus', 'ZenBook UX425', NOW(), 'Alkatrész beszerzés alatt', NOW(), 4),
+  ('M55667', 'Microsoft', 'Surface Laptop 5', NOW(), 'Kész', NOW(), 5);
 ");
 
 echo "✅ Seed sikeresen lefutott!";
